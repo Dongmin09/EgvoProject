@@ -1,0 +1,10 @@
+package kr.or.ddit.service;
+
+import kr.or.ddit.vo.BookVO;
+
+public interface BookService {
+	// 메소드 시그니처
+	// 도서목록
+	public BookVO list();
+
+}

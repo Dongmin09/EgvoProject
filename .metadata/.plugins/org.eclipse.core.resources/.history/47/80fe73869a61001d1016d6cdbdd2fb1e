@@ -1,0 +1,20 @@
+package kr.or.ddit.service.impl;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.BookMapper;
+import kr.or.ddit.vo.BookVO;
+
+@Service
+public class BookServiceImpl {
+	
+	@Autowired
+	BookMapper bookMapper;
+	
+	// 도서목록
+	public BookVO list() {
+		return this.bookMapper.list();
+	}
+}

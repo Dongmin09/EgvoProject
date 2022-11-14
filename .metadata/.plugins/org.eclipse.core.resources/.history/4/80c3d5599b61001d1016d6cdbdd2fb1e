@@ -1,0 +1,8 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.BookVO;
+
+public interface BookMapper {
+	// 도서목록
+	public BookVO list();
+}
