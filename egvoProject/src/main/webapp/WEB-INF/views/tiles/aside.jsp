@@ -66,6 +66,7 @@
               </li>
             </ul>
           </li>
+          
           <!-- 도서관리보드 시작 .//////////////////// -->
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -83,7 +84,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/book/regist" class="nav-link">
+                <a href="/book/insert" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>도서등록</p>
                 </a>
@@ -93,6 +94,34 @@
           
           
           <!-- 도서관리보드 끝  ///////////////////////-->
+          
+          <!-- 이미지 갤러리 시작 .//////////////////// -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-image"></i>
+              <p>
+                이미지 갤러리
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/gallery/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>이미지목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/gallery/regist" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>이미지 등록</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          
+          <!-- 이미지 갤러리 끝  ///////////////////////-->
           
           
           <li class="nav-item">

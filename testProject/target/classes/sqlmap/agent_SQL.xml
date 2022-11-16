@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.or.ddit.mapper.AgentsMapper">
+	
+	<resultMap type="agentsVO" id="agentsMap">       
+		<result property="agentCode" column="AGENT_CODE" />
+		<result property="agentName" column="AGENT_NAME" />
+		<result property="workingArea" column="WORKING_AREA" />
+		<result property="commission" column="COMMISSION" />
+		<result property="phoneNo" column="PHONE_NO" />
+		<result property="country" column="COUNTRY" />
+	</resultMap>
+
+	<select id="Aglist" resultType="agentsVO">
+		SELECT AGENT_CODE, AGENT_NAME, WORKING_AREA, COMMISSION, PHONE_NO, COUNTRY
+		FROM AGENTS
+	</select>
+	
+
+
+	<select id="Agdetail" parameterType="agentsVO" resultType="agentsVO">
+		SELECT AGENT_CODE, AGENT_NAME, WORKING_AREA, COMMISSION, PHONE_NO, COUNTRY
+		FROM AGENTS
+		WHERE  AGENT_CODE = #{agentCode}
+	</select>
+	
+	<insert id="">
+		
+		INSERT INTO AGENTS(AGENT_CODE, AGENT_NAME, WORKING_AREA, 
+									COMMISSION, PHONE_NO, COUNTRY)
+		VALUES(#{agentCode},#{agentName},#{workingArea},#{commission},'011-234-567', 'ARR');
+	
+	
+	</insert>
+	
+	
+	
+</mapper>

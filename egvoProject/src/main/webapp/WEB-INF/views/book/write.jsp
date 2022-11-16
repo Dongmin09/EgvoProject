@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="/resources/js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <!-- JSTL format을 이용하여 천단위 구분기호를 적용할 수 있음  -->
 <!-- JSTL format을 이용하여 날짜포맷을 적용할 수 있음  -->
@@ -37,6 +38,13 @@
 					<div class="input-group">
 						<input type="text" class="form-control rounded-0" id="txtPrice" name="price"
 							value="<fmt:formatNumber value='${bookVO.price}' pattern='#,###' />" readonly />
+					</div>
+				</div>
+				<div class="form-group">
+					<label>책내용:</label>
+					<div class="input-group">
+						<textarea class="form-control" name="content" id="content" style="width: 500px; height: 500px"
+								readonly >${bookVO.content}</textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -88,6 +96,8 @@ $(function(){
 		$(".rounded-0").removeAttr("readOnly");
 		// 제목 , 카테고리, 가격 required 속성 추가
 		$(".rounded-0").attr("required",true);
+		// 책 내용 처리
+		CKEDITOR.instances['content'].setReadOnly(false);
 		
 		//form action 경로추가
 		$("#frm").attr("action","/book/updatePost");
@@ -100,4 +110,7 @@ $(function(){
 	});
 });
 
+</script>
+<script type="text/javascript">
+	CKEDITOR.replace("content");
 </script>

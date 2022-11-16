@@ -5,6 +5,20 @@
 이를 구별하기 위한 식별 용도로 사용 -->
 <mapper namespace="kr.or.ddit.mapper.BookMapper">
 
+	<resultMap type="bookVO" id="bookMap">
+		<result property="bookId" column="BOOK_ID"      />
+		<result property="title" column="TITLE"        />
+		<result property="category" column="CATEGORY"     />
+		<result property="price" column="PRICE"        />
+		<result property="insertDate" column="INSERT_DATE"  />
+		<result property="content" column="CONTENT"      
+				jdbcType="CLOB" javaType="java.lang.String"/>
+		
+		
+		
+	</resultMap>
+
+
 	<!-- 도서 목록  -->
 	<select id="list" resultType="bookVO">
 		SELECT BOOK_ID, TITLE, CATEGORY, PRICE, INSERT_DATE
@@ -12,18 +26,25 @@
 	
 	</select>
 	
-	<!-- 도서 상세  -->
-	<select id="detail" parameterType="int" resultType="bookVO">
-		SELECT BOOK_ID, TITLE, CATEGORY, PRICE, INSERT_DATE
+	<!-- 도서 상세  
+		CONTENT 컬럼..
+		CLOB 타입의 데이터를 MyBatis를 이용해 처리할 때는 resultMap 태그를 만들고 타입을 지정해줘야함
+		CLOB 타입 -> String 메핑
+		java database connectivity의 type : CLOB
+		java type : java.lang.String
+	
+	-->
+	<select id="detail" parameterType="int" resultMap="bookMap">
+		SELECT BOOK_ID, TITLE, CATEGORY, PRICE, INSERT_DATE, CONTENT
 		FROM BOOK
 		WHERE BOOK_ID = #{bookId}
 	
 	</select>
 	
 	<!-- 글 수정하기 -->
-	<update id="update" parameterType="bookVO">
+	<update id="updatePost" parameterType="bookVO">
 		UPDATE BOOK
-		SET TITLE=#{title}, CATEGORY=#{category}, PRICE=#{price}, INSERT_DATE = SYSDATE
+		SET TITLE=#{title}, CATEGORY=#{category}, PRICE=#{price}, INSERT_DATE = SYSDATE, CONTENT=#{content}
 		WHERE BOOK_ID = #{bookId}
 	</update>
 	
