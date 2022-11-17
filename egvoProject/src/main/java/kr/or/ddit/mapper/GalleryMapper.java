@@ -1,6 +1,7 @@
 package kr.or.ddit.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.vo.AttachVO;
 import kr.or.ddit.vo.BookVO;
@@ -18,5 +19,8 @@ public interface GalleryMapper {
 	
 	//업로드 사진 삭제하기
 	public int deletePost(AttachVO attachVO);
+	
+	//도서 검색
+	public List<BookVO> searchPost(BookVO bookVO);
 	
 }

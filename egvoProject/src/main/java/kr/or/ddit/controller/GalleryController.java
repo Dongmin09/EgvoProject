@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -193,17 +196,58 @@ public class GalleryController {
 	// 이미지 삭제
 	// 요청URI : /gallery/deletePost
 	// 요청 파라미터 : {"userNp":"3","seq":"9"}
+	// RequestBody : 요청파라미터 타입(contentType =  contentType:"application/json;charset=utf-8")
+	//				 이 json 일 때 Map 또는 VO로 받음
+	// ResponseBody : json 데이터로 리턴할때 사용
+	@ResponseBody
 	@PostMapping("/deletePost")
-	public Map<String, String> deletePost(@ModelAttribute AttachVO attachVO) {
+	public Map<String, String> deletePost(@RequestBody AttachVO attachVO) {
 		log.info("attachVO : " + attachVO);
 		
 		
 		Map<String, String> map = new HashMap<String, String>();
 
 		//DELETE FROM ATTACH WHERE USER_NO 3 AND SEQ = 9
-		map.put("result","1");
+		int result = this.galleryService.deletePost(attachVO);
+		log.info("result : " + result);
+		
+		map.put("result",result+"");
 		
 		return map;
 	}
+	
+	  @GetMapping("/regist")     
+      public String regist(Model model){
+    	  
+		  // 공통 약속
+		  model.addAttribute("bodyTitle","이미지등록");
+		  
+		  
+		  //forwarding
+		  return "gallery/regist";
+		  
+      }
+	  
+	  /*
+	   * 	요청URI : /gallery/registPost
+	    	요청파라미터 : {"title":"당근마켓"}
+	    	@return json 데이터
+	   		방식 : post
+	   */
+	  @ResponseBody
+	  @PostMapping("/registPost")
+	  public List<BookVO> registPost(@RequestBody BookVO bookVO) {
+		  log.info("bookVO : " + bookVO);
+	  
+		  List<BookVO> bookVOList = this.galleryService.searchPost(bookVO);
+	  
+		  log.info("bookVOList : " + bookVOList);
+		  
+		  return bookVOList;
+		  
+		  
+	  }
+	  
+	  	  
 	
 }

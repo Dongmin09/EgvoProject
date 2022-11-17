@@ -2,6 +2,7 @@ package kr.or.ddit.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,9 @@ public class GalleryServiceImpl implements GalleryService {
 		return this.galleryMapper.deletePost(attachVO);
 	}
 	
-	
+	//도서 검색
+	@Override
+	public List<BookVO> searchPost(BookVO bookVO) {
+		return this.galleryMapper.searchPost(bookVO);
+	}
 }

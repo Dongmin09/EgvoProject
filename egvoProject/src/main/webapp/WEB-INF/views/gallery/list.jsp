@@ -49,8 +49,8 @@
       <div class="modal-content">
          <div class="modal-header">
             <h4 class="modal-title"></h4>
-            <input type="text" id="txtUserNo" value="" />
-            <input type="text" id="txtSeq" value="" />
+            <input type="hidden" id="txtUserNo" value="" />
+            <input type="hidden" id="txtSeq" value="" />
             <button type="button" class="close" data-dismiss="modal"
                aria-label="Close">
                <span aria-hidden="true">×</span>
@@ -295,12 +295,34 @@
             dataType :"json",
             type:"post",
             success:function(result){
+               // result : {"result","1"}
                console.log("result: " + JSON.stringify(result));
+               
+               //1또는 0이 str 변수에 할당됨
+               let str = result.result;
+               
+               
                //result 0보다 크면 성공, 아니면 실패
                // 성공 시 : /gallerylist?bookId=3 / 실패시 : 실패 메세지 alert
+             if(str>0){ // 성공시
+					location.href="/gallery/list?bookId=${param.bookId}";            	 
+             }else{
+            	 alert("삭제가 되지 않앗습니다.");
+             }
+            
             }
-         })
-      });
+         });
+	});
       //이미지 삭제 끝////////////////////////
-   });
+      
+      /** 
+      	*이미지 다중 등록
+      	 요청URI : /gallery/regist
+      	방식 : get 
+      */
+
+      
+      
+      
+});
 </script>

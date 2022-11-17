@@ -1,6 +1,7 @@
 package kr.or.ddit.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.vo.AttachVO;
 import kr.or.ddit.vo.BookVO;
@@ -20,4 +21,8 @@ public interface GalleryService {
 
 	// 업로드 사진 삭제하기
 	public int deletePost(AttachVO attachVO);
+
+	// 도서검색
+	public List<BookVO> searchPost(BookVO bookVO);
+
 }
