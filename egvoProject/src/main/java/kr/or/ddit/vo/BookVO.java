@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -25,8 +26,18 @@ public class BookVO {
 	//첨부파일 테이블(1:N) 관계
 	private List<AttachVO> attachVOList;
 	
+	// 멀티파일을 위한 기본객체 생성
+	private MultipartFile uploadFile;
 	
 	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
 	// 기본 생성자
 	public BookVO() {}
 
@@ -91,9 +102,11 @@ public class BookVO {
 	@Override
 	public String toString() {
 		return "BookVO [bookId=" + bookId + ", title=" + title + ", category=" + category + ", price=" + price
-				+ ", insertDate=" + insertDate + ", content=" + content + ", attachVOList=" + attachVOList + "]";
+				+ ", insertDate=" + insertDate + ", content=" + content + ", attachVOList=" + attachVOList
+				+ ", uploadFile=" + uploadFile + "]";
 	}
 
+	
 	
 
 	

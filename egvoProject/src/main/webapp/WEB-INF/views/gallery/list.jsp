@@ -295,34 +295,20 @@
             dataType :"json",
             type:"post",
             success:function(result){
-               // result : {"result","1"}
-               console.log("result: " + JSON.stringify(result));
-               
-               //1또는 0이 str 변수에 할당됨
+               console.log("result: " + JSON.stringify(result))
+               //1 또는 0이 str변수에 할당됨
                let str = result.result;
+               //result가 0보다 크면 성공, 아니면 실패.
+               //성공 시 : /gallery/list?bookId=3 / 실패 시: 실패 메시지 alert
+               if(str>0){
+                  location.href="/gallery/list?bookId=${param.bookId}"
+               }else{
+                  alert("삭제가 되지 않았습니다.");
+               }
                
-               
-               //result 0보다 크면 성공, 아니면 실패
-               // 성공 시 : /gallerylist?bookId=3 / 실패시 : 실패 메세지 alert
-             if(str>0){ // 성공시
-					location.href="/gallery/list?bookId=${param.bookId}";            	 
-             }else{
-            	 alert("삭제가 되지 않앗습니다.");
-             }
-            
             }
-         });
-	});
+         })
+      });
       //이미지 삭제 끝////////////////////////
-      
-      /** 
-      	*이미지 다중 등록
-      	 요청URI : /gallery/regist
-      	방식 : get 
-      */
-
-      
-      
-      
-});
+   });
 </script>

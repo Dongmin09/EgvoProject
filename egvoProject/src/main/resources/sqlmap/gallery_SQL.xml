@@ -29,7 +29,7 @@
 	
 	
 	<!-- 이미지 목록  -->
-	<select id="list" parameterType="bookVO" resultMap="bookMap">
+	<select id="List" parameterType="bookVO" resultMap="bookMap">
 		
 		SELECT  B.BOOK_ID, B.TITLE, B.CATEGORY, B.PRICE, B.INSERT_DATE, B.CONTENT,
        			A.USER_NO, A.SEQ, A.FILENAME, A.FILESIZE, A.REGDATE
@@ -39,7 +39,7 @@
 	</select>	
 	
 	<!-- 도서목록 가져와서 select에 추가하기  -->
-	<select id="booklist" resultType="bookVO">
+	<select id="bookList" resultType="bookVO">
 		SELECT BOOK_ID, TITLE, CATEGORY, PRICE, INSERT_DATE, CONTENT
 		FROM BOOK
 		ORDER BY TITLE ASC
@@ -78,5 +78,26 @@
 				
 				OR CONTENT LIKE '%' || #{title} || '%')
 	</select>
+
+	<!-- 다중 insert의 경우 update 태그를 사용하자!  
+		드루와 : List<attachVO> attachVOList
+		가즈아 : insert, update , delete 의 경우 resultType은 생략
+		
+	-->
+	<update id="uploadAjaxAction" parameterType="java.util.List">
+	
+		<foreach collection="list" item="attachVO" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
+			INTO ATTACH(USER_NO, SEQ, FILENAME, FILESIZE, REGDATE)
+		 	VALUES(#{attachVO.userNo},#{attachVO.seq},#{attachVO.filename},#{attachVO.filesize},SYSDATE)
+		</foreach>
+	</update>
+	
+	<!-- 파리미터 : String bookId  
+		책의 이미지인 ATTACH 테이블의 다음 seq번호 가져오기
+	-->
+	<select id="getSeq" parameterType="String" resultType="int">
+		SELECT NVL(MAX(SEQ), 0)+1 FROM ATTACH WHERE USER_NO = #{bookId}
+	</select>
+
 
 </mapper>
