@@ -81,7 +81,7 @@ public class GalleryController {
       
       //업로드 폴더 설정
       String uploadFolder = 
-            "C:\\eGovFrameDev-3.10.0-64bit\\workspace\\egovProj\\src\\main\\webapp\\resources\\upload";
+            "C:\\eGovFrameDev-3.10.0-64bit\\workspace\\egvoProject\\src\\main\\webapp\\resources\\upload";
       
       //연월일 폴더 생성
       File uploadPath = new File(uploadFolder,getFolder());

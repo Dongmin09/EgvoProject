@@ -297,11 +297,10 @@ $(function(){
 	            	  Toast.fire({
 	            		     icon:'success',
 	            		     title:'개똥이'
-	            		     setTimeout(() => {
+	            		     setTimeout() => {
 		            			 location.href = "/gallery/list?bookId="+result.bookId;
 							}, 3000);
-            		  });
-	            	  
+	            	  });
 	            }else { // 다중 insert 실패
 					alert("192.168.22님 실패");
 				}
@@ -382,7 +381,8 @@ $(function(){
 			}
 		});
 	});
-});//end function
+});
+//end function
 </script>
 <script type="text/javascript">
 function fn_getInsertDate(geta){
