@@ -37,7 +37,8 @@
 						data-id="/resources/upload${attachVO.filename}"
 						data-title="${bookVO.title}"
 						data-userno="${bookVO.bookId}"
-						data-seq="${attachVO.seq}"> <img
+						data-seq="${attachVO.seq}" 
+						data-filename="${attachVO.filename}"> <img
 						src="/resources/upload${attachVO.filename}"
 						class="img-fluid mb-2" alt="white sample" />
 					</a>
@@ -56,6 +57,7 @@
 				<h4 class="modal-title">Default Modal</h4>
 				<input type="hidden" id="txtUserNo" value="" />
 				<input type="hidden" id="txtSeq" value="" />
+				<input type="text" id="txtFileName" value="" />
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">×</span>
@@ -71,6 +73,9 @@
 				<div style="float:right;">
 					<!-- 일반모드 시작 -->
 					<span id="spn1">
+						<a class="btn btn-app" onclick="fn_download()">
+							<i class="fas fa-save"></i> Save
+						</a>
 						<button type="button" id="edit" class="btn btn-primary">수정</button>
 						<button type="button" id="delete" class="btn btn-danger">삭제</button>
 					</span>
@@ -96,6 +101,7 @@
 	</div>
 </div>
 <!-- Default Modal 끝 -->
+<iframe id="ifrm" name="ifrm"></iframe>
 <script type="text/javascript">
 $(function(){
 	$(".btn-modal").click(function(){
@@ -109,14 +115,27 @@ $(function(){
 		//data-seq=".....
 		let seq = $(this).data("seq");
 		
+		//data-filename-"..."
+		let filename = $(this).data("filename");
+		
+		//세션 스토리지 활용
+		sessionstorage.setItem("filename",filename);
+		
 		console.log("data : " + data + ", title : " + title + 
-					"userNo : " + userNo + ", seq : " + seq);
+					"userNo : " + userNo + ", seq : " + seq +
+					"filename : " + filename);
 		
 		$("#body-content").html("<img src='" + data + "' style='width:100%;' />");
 		//modal은 하나이고, modal-title 클래스 또한 하나임
 		$(".modal-title").text(title);
 		$("#txtUserNo").val(userNo);
 		$("#txtSeq").val(seq);
+		$("#txtFileName").val(filename);
+		
+		
+		
+		
+		
 	});
 	//el 정보를 j/s 변수에 담음
 	let currentBookId = "${param.bookId}";	//?bookId=2
@@ -323,9 +342,26 @@ $(function(){
 		});
 	});
 	//이미지 삭제 끝/////////////////
+	
 });
 </script>
+<script type="text/javascript">
+// 파일 다운로드 함수
+function fn_download(){
+	
+	//세션 스토리지 활용
+	let filename = sessionStorage.getItem("filename");
+	console.log("filename : " + filename);	
+	
+	 // 파일 다운로드 함수 시작   // 세션 스토리지 활용했다
+	   function fn_download(){
+	      let filename = sessionStorage.getItem("filename");
+	      console.log("filename : " + filename);
 
+	   }
+	
+}
+</script>
 
 
 

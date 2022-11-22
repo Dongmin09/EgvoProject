@@ -7,7 +7,7 @@
 
 	<!-- 상품 별 판매금의 합계를 구글차트로 표현해 보자  -->
 	
-	<resultMap type="prodVO" id="hashMap">                      
+<!-- 	<resultMap type="prodVO" id="hashMap">                      
 		<result property="PROD_ID               "          column="PROD_ID"/>
 		<result property="PROD_NAME             "          column="PROD_NAME"/>
 		<result property="PROD_LGU              "          column="PROD_LGU"/>
@@ -32,17 +32,17 @@
 	
 	
 	
-	</resultMap>
+	</resultMap> -->
 	
 	
 	
 	
-	<select id="amtSale" resultMap="hashMap">
+	<select id="amtSale" resultType="hashMap">
 		SELECT  PROD_NAME prodName, SUM(PROD_SALE * CART_QTY) money
 		FROM PROD, CART
 		WHERE PROD_ID = CART_PROD
 		GROUP BY PROD_NAME
-		HAVING SUM(PROD_SALE * CART_QTY) >= 10000000;
+		HAVING SUM(PROD_SALE * CART_QTY) >= 10000000
 	
 	</select>
 

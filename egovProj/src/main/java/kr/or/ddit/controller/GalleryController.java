@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -78,12 +80,31 @@ public class GalleryController {
 	@ResponseBody
 	@PostMapping("/updatePost")
 	public AttachVO updatePost(MultipartFile[] uploadFile, 
-			@ModelAttribute AttachVO attachVO) {
+			@ModelAttribute AttachVO attachVO, HttpServletRequest request) {
+		
+		
+		/*
+			public String chart03(HttpSession session) {
+		      // spring 파일의 절대경로 가져오기
+		      // /resources/upload 윈도 절대경로
+		      
+		      String realPath = session.getServletContext().getRealPath("/resources/upload");
+		      log.info("realPath : " + realPath);
+		      
+		      // forwarding
+		      return "chart/chart03";
+		   }
+		
+		
+		*/
+		
+		
 		log.info("uploadFile : " + uploadFile + ", attachVO : " + attachVO);
 		
+		String absolutePath = request.getRealPath(request.getContextPath());
+		
 		//업로드 폴더 설정
-		String uploadFolder = 
-				"C:\\eGovFrameDev-3.10.0-64bit\\workspace\\egovProj\\src\\main\\webapp\\resources\\upload";
+		String uploadFolder = absolutePath + "\\resources\\upload";
 		
 		//연월일 폴더 생성
 		File uploadPath = new File(uploadFolder,getFolder());

@@ -71,10 +71,14 @@ public class BookController {
 		//price=12000, insertDate=Fri Nov 11 00:00:00 KST 2022]
 		log.info("bookVO : " + bookVO.toString());
 		
-		int result = this.bookService.updatePost(bookVO);
+		//merge into에 의해 bookId가 변경될 것이므로 미리 bookId를 받아놓자
+		int bookId = bookVO.getBookId();
+		
+		//updatePost(bookVO) => insertPost(bookVO)
+		int result = this.bookService.insertPost(bookVO);
 		log.info("result : " + result);
 		
-		return "redirect:/book/detail?bookId="+bookVO.getBookId();
+		return "redirect:/book/detail?bookId="+bookId;
 	}
 	
 	

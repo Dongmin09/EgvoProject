@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="/resources/js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- JSTL format을 이용하여 천단위 구분기호를 적용할 수 있음 -->
 <!-- JSTL format을 이용하여 날짜 포맷을 적용할 수 있음 -->
 <div class="col-md-6" style="width:100%;">
@@ -88,6 +89,7 @@
 		</div>
 		<!-- 수정모드 끝 -->
 	</div>
+	<sec:csrfInput/>
 	</form>
 </div>
 <script type="text/javascript">
